@@ -12,6 +12,8 @@ class Mark(pygame.sprite.Sprite):
         self.image_cross = pygame.image.load("images/cross.png")
         self.image = self.image_none
         self.rect = self.image.get_rect()
+        self.row = row
+        self.col = col
         self.row_pos = [175, 286, 398]
         self.col_pos = [180, 286, 394]
         self.rect.x, self.rect.y = self.row_pos[col], self.col_pos[row]
