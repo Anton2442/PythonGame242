@@ -13,7 +13,7 @@ def run():
     sc = controls.create_scores(screen)
 
     while True:
-        controls.events(marks)
+        controls.events(marks, sc)
         controls.update(bg, screen, marks, sc)
 
 

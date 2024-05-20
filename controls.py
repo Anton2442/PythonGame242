@@ -4,7 +4,7 @@ from scores import Scores
 
 turn = 1
 
-def events(marks):
+def events(marks, sc):
     """обработка событий"""
     global turn
     for event in pygame.event.get():
@@ -15,18 +15,17 @@ def events(marks):
             # обработка клика мышкой
             mouse_pos = event.pos
             for mark in marks:
-                if mark.rect.collidepoint(mouse_pos) and mark.image == mark.image_none:
+                if mark.rect.collidepoint(mouse_pos) and mark.player == 0:
                     if turn == 1:
                         mark.image = mark.image_cross
+                        mark.player = 1
                         turn = 2
                     else:
                         mark.image = mark.image_zero
+                        mark.player = 2
                         turn = 1
-                    winner = check_win(marks)
-                    if winner and winner == mark.image_zero:
-                        print("Синий победил")
-                    elif winner and winner == mark.image_cross:
-                        print("Красный победил!")
+                    check_win(marks, sc)
+
 
 def create_marks(screen, marks):
     """Создание позиций для крестиков и ноликов"""
@@ -45,31 +44,42 @@ def create_scores(screen):
     sc = [red_score, blue_score]
     return sc
 
-def check_win(marks):
+def check_win(marks, sc):
     """Проверка на победу"""
+    winner = None
+
     # Преобразование marks в матрицу для удобства проверки
     grid = [[None for _ in range(3)] for _ in range(3)]
     for mark in marks:
-        grid[mark.row][mark.col] = mark.image
-
+        grid[mark.row][mark.col] = mark.player
 
     # Проверка горизонтальных линий
     for row in range(3):
-        if grid[row][0] == grid[row][1] == grid[row][2] and grid[row][0] != mark.image_none:
-            return grid[row][0]
+        if grid[row][0] == grid[row][1] == grid[row][2] and grid[row][0] != 0:
+            winner = grid[row][0]
 
     # Проверка вертикальных линий
     for col in range(3):
-        if grid[0][col] == grid[1][col] == grid[2][col] and grid[0][col] != mark.image_none:
-            return grid[0][col]
+        if grid[0][col] == grid[1][col] == grid[2][col] and grid[0][col] != 0:
+            winner = grid[0][col]
 
     # Проверка диагоналей
-    if grid[0][0] == grid[1][1] == grid[2][2] and grid[0][0] != mark.image_none:
-        return grid[0][0]
-    if grid[0][2] == grid[1][1] == grid[2][0] and grid[0][2] != mark.image_none:
-        return grid[0][2]
+    if grid[0][0] == grid[1][1] == grid[2][2] and grid[0][0] != 0:
+        winner = grid[0][0]
+    if grid[0][2] == grid[1][1] == grid[2][0] and grid[0][2] != 0:
+        winner = grid[0][2]
 
+    if winner and winner == 1:
+        sc[0].add_score()
+        clear_marks(marks)
+    elif winner and winner == 2:
+        sc[1].add_score()
+        clear_marks(marks)
 
+def clear_marks(marks):
+    for mark in marks:
+        mark.player = 0
+        mark.image = mark.image_empty
 
 def update(bg, screen, marks, sc):
     """обновление экрана"""
