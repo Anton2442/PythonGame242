@@ -31,6 +31,7 @@ class Scores():
         self.screen.blit(self.score_img, self.score_rect)
 
     def add_score(self):
+        """добавление одного очка"""
         self.score += 1
         self.image_score()
 

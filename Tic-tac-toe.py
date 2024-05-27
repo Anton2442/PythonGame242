@@ -4,6 +4,7 @@ from pygame.sprite import Group
 
 
 def run():
+    """основная функция, запускающая игру"""
     pygame.init()
     screen = pygame.display.set_mode((700, 800))
     pygame.display.set_caption("Крестики-нолики")
@@ -13,6 +14,7 @@ def run():
     sc = controls.create_scores(screen)
 
     while True:
+        """основной цикл"""
         controls.events(marks, sc)
         controls.update(bg, screen, marks, sc)
 

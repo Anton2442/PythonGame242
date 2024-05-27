@@ -6,6 +6,7 @@ class Mark(pygame.sprite.Sprite):
     def __init__(self, screen, row, col):
         """инициализируем метку (пока что пустую)"""
         super(Mark, self).__init__()
+        self.lifes = 3
         self.player = 0
         self.screen = screen
         self.image_empty = pygame.image.load("images/empty_image.png")

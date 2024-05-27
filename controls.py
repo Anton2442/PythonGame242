@@ -19,10 +19,12 @@ def events(marks, sc):
                     if turn == 1:
                         mark.image = mark.image_cross
                         mark.player = 1
+                        change_marks_lifes(marks, mark.player)
                         turn = 2
                     else:
                         mark.image = mark.image_zero
                         mark.player = 2
+                        change_marks_lifes(marks, mark.player)
                         turn = 1
                     check_win(marks, sc)
 
@@ -77,9 +79,27 @@ def check_win(marks, sc):
         clear_marks(marks)
 
 def clear_marks(marks):
+    """очистка поля"""
     for mark in marks:
+        mark.lifes = 3
         mark.player = 0
         mark.image = mark.image_empty
+
+def change_marks_lifes(marks, player):
+    """уменьшение жизней отметкам"""
+    for mark in marks:
+        if mark.player == player:
+            mark.lifes -= 1
+    check_marks_lifes(marks)
+
+def check_marks_lifes(marks):
+    """удаление отметок у которых не осталось жизней"""
+    for mark in marks:
+        if mark.lifes < 0:
+            mark.lifes = 3
+            mark.player = 0
+            mark.image = mark.image_empty
+
 
 def update(bg, screen, marks, sc):
     """обновление экрана"""
