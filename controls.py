@@ -99,6 +99,12 @@ def check_marks_lifes(marks):
             mark.lifes = 3
             mark.player = 0
             mark.image = mark.image_empty
+        elif mark.lifes == 0:
+            if mark.player == 1:
+                mark.image = mark.image_cross_transparent
+            else:
+                mark.image = mark.image_zero_transparent
+
 
 
 def update(bg, screen, marks, sc):

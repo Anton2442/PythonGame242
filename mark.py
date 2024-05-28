@@ -12,6 +12,8 @@ class Mark(pygame.sprite.Sprite):
         self.image_empty = pygame.image.load("images/empty_image.png")
         self.image_zero = pygame.image.load("images/zero.png")
         self.image_cross = pygame.image.load("images/cross.png")
+        self.image_zero_transparent = pygame.image.load("images/zero_transparent.png")
+        self.image_cross_transparent = pygame.image.load("images/cross_transparent.png")
         self.image = self.image_empty
         self.rect = self.image.get_rect()
         self.row = row
