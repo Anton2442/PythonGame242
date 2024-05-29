@@ -4,7 +4,7 @@ from scores import Scores
 
 turn = 1
 
-def events(marks, sc):
+def events(marks, sc, turn_indicator):
     """обработка событий"""
     global turn
     for event in pygame.event.get():
@@ -21,11 +21,13 @@ def events(marks, sc):
                         mark.player = 1
                         change_marks_lifes(marks, mark.player)
                         turn = 2
+                        turn_indicator.change_turn()
                     else:
                         mark.image = mark.image_zero
                         mark.player = 2
                         change_marks_lifes(marks, mark.player)
                         turn = 1
+                        turn_indicator.change_turn()
                     check_win(marks, sc)
 
 
@@ -107,10 +109,12 @@ def check_marks_lifes(marks):
 
 
 
-def update(bg, screen, marks, sc):
+def update(bg, screen, marks, sc, turn_indicator, turn_text):
     """обновление экрана"""
     bg.draw()
     marks.draw(screen)
     for score in sc:
         score.show_score()
+    turn_indicator.draw()
+    turn_text.show_text()
     pygame.display.flip()
