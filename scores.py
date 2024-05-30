@@ -1,6 +1,4 @@
 import pygame.font
-
-
 class Scores():
     """вывод игровой информации"""
     def __init__(self, screen):

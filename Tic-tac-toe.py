@@ -22,5 +22,4 @@ def run():
         controls.events(marks, sc, turn_indicator)
         controls.update(bg, screen, marks, sc, turn_indicator, turn_text)
 
-
 run()

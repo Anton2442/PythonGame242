@@ -1,9 +1,7 @@
 import pygame, sys
 from mark import Mark
 from scores import Scores
-
 turn = 1
-
 def events(marks, sc, turn_indicator):
     """обработка событий"""
     global turn
@@ -29,7 +27,15 @@ def events(marks, sc, turn_indicator):
                         turn = 1
                         turn_indicator.change_turn()
                     check_win(marks, sc)
-
+def update(bg, screen, marks, sc, turn_indicator, turn_text):
+    """обновление экрана"""
+    bg.draw()
+    marks.draw(screen)
+    for score in sc:
+        score.show_score()
+    turn_indicator.draw()
+    turn_text.show_text()
+    pygame.display.flip()
 
 def create_marks(screen, marks):
     """Создание позиций для крестиков и ноликов"""
@@ -108,13 +114,3 @@ def check_marks_lifes(marks):
                 mark.image = mark.image_zero_transparent
 
 
-
-def update(bg, screen, marks, sc, turn_indicator, turn_text):
-    """обновление экрана"""
-    bg.draw()
-    marks.draw(screen)
-    for score in sc:
-        score.show_score()
-    turn_indicator.draw()
-    turn_text.show_text()
-    pygame.display.flip()
