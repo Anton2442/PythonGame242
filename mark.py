@@ -18,9 +18,9 @@ class Mark(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.row = row
         self.col = col
-        self.row_pos = [175, 286, 398]
-        self.col_pos = [180, 286, 394]
-        self.rect.x, self.rect.y = self.row_pos[col], self.col_pos[row]
+        self.row_pos = [220, 331, 443]
+        self.col_pos = [225, 331, 439]
+        self.rect.centerx, self.rect.centery = self.row_pos[col], self.col_pos[row]
 
     def draw(self):
         """вывод метки на экран"""
